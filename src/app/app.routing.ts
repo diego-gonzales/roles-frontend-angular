@@ -5,12 +5,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes =[
   {
-    path: '',
+    path: 'pages',
     loadChildren: () => import('./layout/layout.module').then( m => m.LayoutModule )
   },
   {
+    path: 'authentication',
+    loadChildren: () => import('./pages/authentication/authentication.module').then( m => m.AuthenticationModule )
+  },
+  {
     path: '**',
-    redirectTo: ''
+    redirectTo: 'authentication',
   }
 ];
 
@@ -21,6 +25,7 @@ const routes: Routes =[
     RouterModule.forRoot(routes) // se sacó el useHash()
   ],
   exports: [
+    RouterModule
   ],
 })
 export class AppRoutingModule { }
