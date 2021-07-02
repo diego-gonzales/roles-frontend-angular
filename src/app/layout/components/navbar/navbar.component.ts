@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../../pages/authentication/services/authentication.service';
 
 @Component({
   selector: "app-navbar",
@@ -15,10 +16,15 @@ export class NavbarComponent implements OnInit {
   private toggleButton: any;
   private sidebarVisible: boolean;
 
+  get currentUser() {
+    return this.authService.currentUser;
+  };
+
   constructor(
     location: Location,
     private element: ElementRef,
-    private router: Router
+    private router: Router,
+    private authService: AuthenticationService
   ) {
     this.location = location;
     this.sidebarVisible = false;
@@ -116,15 +122,25 @@ export class NavbarComponent implements OnInit {
 
   getTitle() {
     var titlee = this.location.prepareExternalUrl(this.location.path());
-    if (titlee.charAt(0) === "#") {
-      titlee = titlee.slice(1);
-    }
+    const array = titlee.split('/');
 
     for (var item = 0; item < this.listTitles.length; item++) {
-      if (this.listTitles[item].path === titlee) {
+      if (this.listTitles[item].path.split('/')[2] === array[2]) {
         return this.listTitles[item].title;
       }
-    }
+    };
     return "Dashboard";
+
+    // if (titlee.charAt(0) === "#") {
+    //   titlee = titlee.slice(1);
+    // }
+
+    // for (var item = 0; item < this.listTitles.length; item++) {
+    //   if (this.listTitles[item].path === titlee) {
+    //     return this.listTitles[item].title;
+    //   }
+    // }
+
+    // return "Dashboard";
   }
 }

@@ -1,0 +1,54 @@
+<mat-toolbar color="primary">
+    <span>My Application</span>
+</mat-toolbar>
+
+<mat-grid-list cols="1" rowHeight="600">
+    <mat-grid-tile>
+        <div class="text-center animated bounceInRight">
+            <h3>Create new account</h3>
+
+            <form (ngSubmit)="signup()"
+                [formGroup]="myRegisterForm"
+                autocomplete="off">
+                <mat-form-field appearance="outline">
+                    <mat-label>Username</mat-label>
+                    <input matInput
+                            placeholder="Enter your username"
+                            formControlName="username">
+                    <mat-icon matSuffix>person</mat-icon>
+                    <!-- <mat-hint>Hint</mat-hint> -->
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput
+                            placeholder="Enter your email"
+                            formControlName="email">
+                    <mat-icon matSuffix>email</mat-icon>
+                    <!-- <mat-hint>Hint</mat-hint> -->
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput
+                            placeholder="Enter your assword"
+                            formControlName="password">
+                    <mat-icon matSuffix>lock</mat-icon>
+                    <!-- <mat-hint>Hint</mat-hint> -->
+                </mat-form-field>
+
+                <button mat-raised-button
+                        color="primary"
+                        type="submit">
+                    Sign Up
+                </button>
+            </form>
+
+            <br>
+            <div>
+            <p>Do you already have an account?</p>
+            <a routerLink="/authentication/signin">Sing In</a>
+            </div>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>

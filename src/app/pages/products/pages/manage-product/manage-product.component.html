@@ -1,0 +1,119 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">
+                            {{ (!product) ? 'Create new product' : 'Update product'}}
+                        </h4>
+                        <p class="card-category">
+                            {{ (!product) ? 'Complete the form' : 'Update the form'}}
+                        </p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="myForm"
+                              (ngSubmit)="submit()">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput
+                                               placeholder="Name"
+                                               type="text"
+                                               formControlName="name">
+                                        <mat-error *ngIf="fieldIsInvalid('name')">
+                                            Field is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field>
+                                        <mat-label>Category</mat-label>
+                                        <mat-select formControlName="category">
+                                            <mat-option *ngFor="let category of categoryNames"
+                                                        [value]="category">
+                                                {{category}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="fieldIsInvalid('category')">
+                                            Field is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput
+                                            placeholder="Price"
+                                            type="number"
+                                            min="0"
+                                            formControlName="price">
+                                        <span matPrefix>S/.&nbsp;</span>
+                                        <mat-error *ngIf="fieldIsInvalid('price')">
+                                            Field is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput
+                                               placeholder="Stock"
+                                               type="number"
+                                               min="0"
+                                               formControlName="stock">
+                                        <mat-error *ngIf="fieldIsInvalid('stock')">
+                                            Field is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field>
+                                        <mat-label>Status</mat-label>
+                                        <mat-select formControlName="status">
+                                            <mat-option [value]="1">Active</mat-option>
+                                            <mat-option [value]="0">Inactive</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="fieldIsInvalid('status')">
+                                            Field is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 d-flex justify-content-between">
+                                <button mat-raised-button
+                                        type="submit"
+                                        class="btn btn-danger">
+                                    <i class="material-icons">save</i>
+                                    Save
+                                </button>
+    
+                                <button type="button"
+                                        mat-raised-button
+                                        class="btn btn-primary"
+                                        (click)="back()">
+                                    <i class="material-icons">arrow_back</i>
+                                    Back
+                                </button>
+                            </div>
+                            <!-- <div class="clearfix"></div> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div>
+    <code>
+        {{ myForm.value | json}}
+    </code>
+</div> -->
