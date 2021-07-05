@@ -18,7 +18,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                private router: Router ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log('Error Interceptor')
+    // console.log('Error Interceptor')
     return next.handle(request)
                 .pipe(
                   catchError( (err: HttpErrorResponse) => {
@@ -27,8 +27,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                       this.router.navigateByUrl('/authentication/signin');
                     };
 
-                    // Importante enviar todo el error (ya que se podría enviar solo el mensaje)
-                    // si lo queremos usar en algún componente
+                    // Importante enviar todo el error si lo queremos usar en algún componente
+                    // (ya que se podría enviar solo el mensaje)
                     return throwError(err);
                   })
                 );

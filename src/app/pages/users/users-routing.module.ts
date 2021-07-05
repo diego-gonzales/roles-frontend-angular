@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsersListComponent } from './pages/users-list/users-list.component';
 import { ManageUsersComponent } from './pages/manage-users/manage-users.component';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: 'update/:id',
         component: ManageUsersComponent
+      },
+      {
+        path: 'updatePass/:id',
+        component: ChangePasswordComponent
       },
       {
         path: '**',
