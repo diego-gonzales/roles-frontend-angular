@@ -97,7 +97,7 @@ export class ManageProductComponent implements OnInit {
             this.product = resp;
             this.myForm.reset({
               name: resp.name,
-              category: resp.category.name,
+              category: resp.category?.name,
               price: resp.price,
               stock: resp.stock,
               status: resp.status

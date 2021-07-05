@@ -36,7 +36,10 @@
                           <!-- [routerLink]="['/pages/products/detail', product._id]" -->
                           <td>{{i + 1}}</td>
                           <td>{{product.name}}</td>
-                          <td>{{product.category.name}}</td>
+                          <!-- Esto lo puse porque pueda que borremos una categoria que esta
+                            asignada a un producto y el autopopulate de mongoose ya no lo encontrará y me dará
+                            la categoría como null. Hago la misma validacion en el .ts al llenar el form -->
+                          <td>{{product.category?.name || '---'}}</td>
                           <td>S/.{{product.price}}</td>
                           <td>{{product.stock}}</td>
                           <td>{{product.status}}</td>
