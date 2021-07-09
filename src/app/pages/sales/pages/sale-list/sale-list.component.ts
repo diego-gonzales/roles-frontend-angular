@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SaleService } from '../../services/sale.service';
-import { Sale } from '../../interfaces/sales-response.interface';
+import { Sale } from '../../interfaces/sale-response.interface';
 
 @Component({
   selector: 'app-sale-list',
@@ -26,9 +26,5 @@ export class SaleListComponent implements OnInit {
           this.sales = resp;
         });
   };
-
-  deleteSale(idSale: string) {
-
-  }
 
 }

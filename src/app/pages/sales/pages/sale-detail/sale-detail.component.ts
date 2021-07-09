@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SaleService } from '../../services/sale.service';
 import { switchMap } from 'rxjs/operators';
-import { Sale, Product } from '../../interfaces/sales-response.interface';
+import { SaleService } from '../../services/sale.service';
+import { Sale } from '../../interfaces/sale-response.interface';
 
 @Component({
   selector: 'app-sale-detail',

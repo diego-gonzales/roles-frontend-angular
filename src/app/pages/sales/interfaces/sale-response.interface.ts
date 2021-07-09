@@ -7,10 +7,10 @@ export interface SalesResponse {
 }
 
 export interface Sale {
-    products:   Product[];
     _id:        string;
     customer:   Customer;
     user:       User;
+    products:   ProductElement[];
     totalPrice: number;
     createdAt:  string;
     updatedAt:  string;
@@ -20,10 +20,16 @@ export interface Customer {
     _id:            string;
     documentNumber: string;
     name:           string;
-    address:        string;
+    address?:       string;
     phoneNumber:    string;
     createdAt:      string;
     updatedAt:      string;
+}
+
+export interface ProductElement {
+    _id:      string;
+    product:  Product;
+    quantity: number;
 }
 
 export interface Product {
@@ -38,6 +44,13 @@ export interface Product {
     updatedAt: string;
 }
 
+export interface Role {
+    _id:       string;
+    name:      string;
+    createdAt: string;
+    updatedAt: string;
+}
+
 export interface Category {
     _id:       string;
     name:      string;
@@ -46,7 +59,7 @@ export interface Category {
 }
 
 export interface User {
-    roles:     Category[];
+    roles:     Role[];
     _id:       string;
     username:  string;
     email:     string;

@@ -60,21 +60,20 @@
                         <div class="col-md-12">
                             <dl>
                                 <dt>SOLD PRODUCTS:</dt>
-                                <!-- <dd *ngFor="let product of sale.products; let i = index">
-                                    {{i+1}}. {{product.name}}
-                                </dd> -->
-                                <table class="table table-hover">
+                                <table class="table table-hover text-center">
                                     <thead class="text-warning">
                                         <th>Code Product</th>
                                         <th>Name</th>
-                                        <th>Price</th>
+                                        <th>Unit Price</th>
+                                        <th>Quantity</th>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let product of sale.products">
+                                        <tr *ngFor="let productElement of sale.products">
                                             <!-- [routerLink]="['/pages/products/detail', product._id]" -->
-                                            <td>{{product._id}}</td>
-                                            <td>{{product.name}}</td>
-                                            <td>{{product.price | currency:'S/.'}}</td>
+                                            <td>{{productElement.product._id}}</td>
+                                            <td>{{productElement.product.name}}</td>
+                                            <td>{{productElement.product.price | currency:'S/.'}}</td>
+                                            <td>{{productElement.quantity}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
