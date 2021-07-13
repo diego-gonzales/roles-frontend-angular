@@ -22,8 +22,7 @@ export class SaleListComponent implements OnInit {
   getSalesAndFillArray(): void {
     this.saleService.getSales()
         .subscribe( resp => {
-          console.log(resp)
-          this.sales = resp;
+          this.sales = resp.reverse();
         });
   };
 

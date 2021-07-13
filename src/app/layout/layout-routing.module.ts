@@ -33,7 +33,8 @@ const routes: Routes = [
       },
       {
         path: 'sales',
-        loadChildren: () => import('../pages/sales/sales.module').then( m => m.SalesModule )
+        loadChildren: () => import('../pages/sales/sales.module').then( m => m.SalesModule ),
+        // canActivate: [AuthGuard]
       },
       { 
         path: 'user-profile',

@@ -7,13 +7,13 @@ export interface SalesResponse {
 }
 
 export interface Sale {
-    _id:        string;
-    customer:   Customer;
+    _id?:        string;
+    customer?:   Customer;
     user:       User;
     products:   ProductElement[];
     totalPrice: number;
-    createdAt:  string;
-    updatedAt:  string;
+    createdAt?:  string;
+    updatedAt?:  string;
 }
 
 export interface Customer {
@@ -27,21 +27,21 @@ export interface Customer {
 }
 
 export interface ProductElement {
-    _id:      string;
+    _id?:      string;
     product:  Product;
     quantity: number;
 }
 
 export interface Product {
     status:    number;
-    _id:       string;
+    _id?:       string;
     name:      string;
     price:     number;
-    imageURL:  string;
+    imageURL?:  string;
     stock:     number;
-    category:  Category;
-    createdAt: string;
-    updatedAt: string;
+    category?:  Category;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface Role {
@@ -52,10 +52,10 @@ export interface Role {
 }
 
 export interface Category {
-    _id:       string;
+    _id?:       string;
     name:      string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface User {

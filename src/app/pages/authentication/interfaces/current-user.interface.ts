@@ -1,5 +1,5 @@
 export interface CurrentUser {
-    _id: string;
+    sub: string;
     username: string;
     roles: string[];
 }

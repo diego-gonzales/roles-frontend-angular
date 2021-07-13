@@ -28,7 +28,6 @@ export class SaleDetailComponent implements OnInit {
         .pipe(
           switchMap( ({id}) => this.saleService.getSale(id) )
         ).subscribe( resp => {
-          console.log(resp)
           this.sale = resp;
         });
   };

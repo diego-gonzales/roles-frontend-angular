@@ -1,1 +1,142 @@
-<p>manage-sales works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="col-md-12">
+            <button mat-raised-button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="back()">
+                <i class="material-icons">arrow_back_ios</i>
+                Back
+            </button>
+        </div>
+    
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary d-flex justify-content-start">
+                    <i class="material-icons mr-2">receipt_long</i>
+                    <h4 class="card-title">New Sale</h4>
+                </div>
+                <div class="card-body table-responsive table-hover">
+
+                    <div class="row mb-4">
+                        <h4>Customer Information</h4>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width" appearance="fill">
+                              <mat-label>Customer</mat-label>
+                              <input type="text"
+                                     placeholder="Search one"
+                                     aria-label="Number"
+                                     matInput
+                                     [formControl]="myCustomerControl"
+                                     [matAutocomplete]="auto">
+                              <mat-hint>This field is not required</mat-hint>
+                              <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let customer of customerFilteredOptions | async" [value]="customer._id">
+                                  {{customer.name}}
+                                </mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <h4>Add products</h4>
+                        <form [formGroup]="myProductForm"
+                              (ngSubmit)="addProduct()">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                      <mat-label>Product</mat-label>
+                                      <input type="text"
+                                             placeholder="Search one"
+                                             aria-label="Number"
+                                             matInput
+                                             formControlName="codeProduct"
+                                             [matAutocomplete]="auto1">
+                                      <mat-error *ngIf="fieldIsInvalid()">This field is required</mat-error>
+                                      <mat-autocomplete #auto1="matAutocomplete">
+                                        <mat-option *ngFor="let product of productFilteredOptions | async" [value]="product._id">
+                                          {{product.name}}
+                                        </mat-option>
+                                      </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
+    
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Quantity</mat-label>
+                                        <input type="number"
+                                               min="0"
+                                               placeholder="Enter quantity"
+                                               matInput
+                                               formControlName="quantity">
+                                    </mat-form-field>
+                                </div>
+        
+                                <div class="col-md-2">
+                                    <button mat-raised-button
+                                            class="btn btn-danger"
+                                            type="submit">
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <table class="table table-hover text-center mt-3"
+                           *ngIf="productsToSale.length">
+                        <thead class="text-warning">
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let productElement of productsToSale; let i = index">
+                                <td>{{productElement.product._id}}</td>
+                                <td>{{productElement.product.name}}</td>
+                                <td>S/.{{productElement.product.price | number:'.2'}}</td>
+                                <td>{{productElement.quantity}}</td>
+                                <td>S/.{{(productElement.quantity * productElement.product.price) | number:'.2'}}</td>
+                                <td class="td-actions">
+                                    <button mat-raised-button
+                                            type="button"
+                                            matTooltip="Remove"
+                                            [matTooltipPosition]="'above'"
+                                            class="btn btn-primary btn-link btn-sm btn-just-icon"
+                                            (click)="removeProduct(productElement.product._id)">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <th>Total to pay</th>
+                                <td>S/.{{getTotalToPay() | number:'.2'}}</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="card-footer justify-content-center"
+                     *ngIf="productsToSale.length">
+                    <button type="button"
+                            class="btn btn-primary"
+                            (click)="makeSale()">
+                        Make sale
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { SalesRoutingModule } from './sales-rounting.module';
 import { MaterialModule } from '../material/material.module';
@@ -18,6 +19,7 @@ import { SaleDetailComponent } from './pages/sale-detail/sale-detail.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SalesRoutingModule,
     MaterialModule
   ]

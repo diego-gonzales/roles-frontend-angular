@@ -30,6 +30,11 @@ export class SaleService {
                );
   };
 
-  
+  postSale(newSale: any): Observable<Sale> {
+    return this.http.post<SalesResponse>(`${this._salesUrl}`, newSale)
+               .pipe(
+                 map( resp => resp.sale )
+               );
+  };
 
 }
