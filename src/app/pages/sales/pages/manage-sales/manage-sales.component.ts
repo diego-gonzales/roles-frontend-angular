@@ -11,6 +11,8 @@ import { AuthenticationService } from '../../../authentication/services/authenti
 import { SaleService } from '../../services/sale.service';
 import { showLoading, closeLoading } from '../../../../shared/helpers/sweetalert.helper';
 import { showNotification } from '../../../../shared/helpers/notifications.helper';
+import { DialogService } from '../../../../shared/services/dialog.service';
+
 @Component({
   selector: 'app-manage-sales',
   templateUrl: './manage-sales.component.html',
@@ -35,7 +37,8 @@ export class ManageSalesComponent implements OnInit {
                private productService: ProductService,
                private authenticationService: AuthenticationService,
                private fb: FormBuilder,
-               private router: Router ) { }
+               private router: Router,
+               private dialogService: DialogService ) { }
 
   ngOnInit(): void {
     this.getAllCustomers();
@@ -90,32 +93,42 @@ export class ManageSalesComponent implements OnInit {
 
     const { codeProduct, quantity } = this.myProductForm.value;
 
-    const productAlreadyExistInArray: boolean = this.productsToSale.some(productElement => productElement.product._id === codeProduct);
+    /* Buscamos el producto que se quiere agregar por su codigo
+     y verificamos si hay stock disponible */
+    this.productService.getProduct(codeProduct)
+        .subscribe( resp => {
 
-    (productAlreadyExistInArray)
-          ? this.onlyModifyQuantityToProduct(codeProduct, quantity)
-          : this.pushProductToArray(codeProduct, quantity);
+          if (resp.stock < quantity) {
+            this.dialogService.showDialog('Message', `Not enough stock. Available stock: ${resp.stock}`, true);
+            return;
+          };
 
-    this.myProductForm.reset({
-      codeProduct: '',
-      quantity: 0
-    });
+          const productAlreadyExistInArray: boolean = this.productsToSale.some(productElement => productElement.product._id === codeProduct);
 
+          (productAlreadyExistInArray)
+                ? this.onlyModifyQuantityToProduct(codeProduct, quantity, resp)
+                : this.pushProductToArray(codeProduct, quantity, resp);
+
+          this.myProductForm.reset({
+            codeProduct: '',
+            quantity: 0
+          });
+        });
   };
 
-  onlyModifyQuantityToProduct(codeProduct: string, quantity: number) {
+  onlyModifyQuantityToProduct(codeProduct: string, quantity: number, resp: Product) {
     this.productsToSale.forEach( productElement => {
       if (productElement.product._id === codeProduct) {
-        productElement.quantity += quantity;
+        const totalQuantity = productElement.quantity + quantity;
+        (resp.stock >= totalQuantity)
+              ? productElement.quantity += quantity
+              : this.dialogService.showDialog('Message', `Not enough stock. Available stock: ${resp.stock}`, true);
       };
     });
   };
 
-  pushProductToArray(codeProduct: string, quantity: number) {
-    this.productService.getProduct(codeProduct)
-          .subscribe( resp => {
-            this.productsToSale.push({ product: resp, quantity});
-          });
+  pushProductToArray(codeProduct: string, quantity: number, resp: Product) {
+    this.productsToSale.push({ product: resp, quantity});
   };
 
   removeProduct(idProduct: string) {

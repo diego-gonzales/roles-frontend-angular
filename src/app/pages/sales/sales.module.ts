@@ -9,6 +9,9 @@ import { SaleListComponent } from './pages/sale-list/sale-list.component';
 import { ManageSalesComponent } from './pages/manage-sales/manage-sales.component';
 import { SaleDetailComponent } from './pages/sale-detail/sale-detail.component';
 
+import { DialogService } from '../../shared/services/dialog.service';
+import { SharedModule } from '../../shared/shared.module';
+
 
 
 @NgModule({
@@ -21,7 +24,11 @@ import { SaleDetailComponent } from './pages/sale-detail/sale-detail.component';
     CommonModule,
     ReactiveFormsModule,
     SalesRoutingModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
+  ],
+  providers: [
+    DialogService // para que funcione tienes que importar el servicio en los providers del modulo en el que se usará
   ]
 })
 export class SalesModule { }
