@@ -16,6 +16,8 @@ export class RegisterComponent implements OnInit {
     email: [ '', [Validators.required, Validators.email] ],
     password: [ '', [Validators.required, Validators.minLength(6)] ]
   })
+
+
   constructor( private fb: FormBuilder,
                private authService: AuthenticationService,
                private router: Router ) { }
@@ -33,7 +35,7 @@ export class RegisterComponent implements OnInit {
     showLoading('Please wait...');
 
     this.authService.signUp(username, email, password)
-        .subscribe( resp => {
+        .subscribe( () => {
             closeLoading();
             this.router.navigateByUrl('/pages/dashboard');
         }, err => {

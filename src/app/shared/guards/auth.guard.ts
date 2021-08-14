@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanActivate, CanLoad, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../../pages/authentication/services/authentication.service';
 import { tap } from 'rxjs/operators';
@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate, CanLoad {
                private router: Router ) { }
 
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
+  canActivate(): Observable<boolean> | boolean {
     return this.authService.isAuthenticated()
                .pipe(
                  tap( resp => {
@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate, CanLoad {
                );
   };
 
-  canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> | boolean {
+  canLoad(): Observable<boolean> | boolean {
     return this.authService.isAuthenticated()
                .pipe(
                  tap( resp => {

@@ -47,6 +47,8 @@ export class ChangePasswordComponent implements OnInit {
           closeLoading();
           showNotification('bottom', 'center', 'PASSWORD has been successfully changed');
           this.router.navigateByUrl('/pages/users/list');
+        }, (err) => {
+          closeLoading();
         });
   };
 
