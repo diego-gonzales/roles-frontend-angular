@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
     }
   };
 
+
   constructor( private fb: FormBuilder,
                private authService: AuthenticationService,
                private router: Router ) { }
@@ -45,7 +46,7 @@ export class LoginComponent implements OnInit {
     this.showLoading();
 
     this.authService.signIn( username, password )
-        .subscribe( resp => {
+        .subscribe( () => {
           this.closeLoading();
           this.router.navigateByUrl('/pages/dashboard');
         }, err => {
