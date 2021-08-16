@@ -6,6 +6,7 @@ import { Product } from '../../interfaces/products-response.interface';
 // import { confirmDialog } from '../../../../shared/helpers/sweetalert.helper';
 import { showNotification } from '../../../../shared/helpers/notifications.helper';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { AuthenticationService } from '../../../authentication/services/authentication.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class ProductListComponent implements OnInit {
 
 
   constructor( private productService: ProductService,
-               private dialog: MatDialog ) { }
+               private dialog: MatDialog,
+               public authenticationService: AuthenticationService ) { }
 
   ngOnInit() {
     this.getProductsAndFillArray();

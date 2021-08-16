@@ -4,6 +4,7 @@ import { Customer } from '../../interfaces/customer-response.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { showNotification } from '../../../../shared/helpers/notifications.helper';
+import { AuthenticationService } from '../../../authentication/services/authentication.service';
 
 @Component({
   selector: 'app-customers-list',
@@ -16,7 +17,8 @@ export class CustomersListComponent implements OnInit {
 
 
   constructor( private customerService: CustomerService,
-               private dialog: MatDialog ) { }
+               private dialog: MatDialog,
+               public authenticationService: AuthenticationService ) { }
 
   ngOnInit(): void {
     this.getCustomersAndFillArray();

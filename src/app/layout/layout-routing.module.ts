@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LayoutComponent } from './layout.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
+import { NoUserGuard } from '../shared/guards/no-user.guard';
 
 
 const routes: Routes = [
@@ -17,15 +18,18 @@ const routes: Routes = [
       {
         path: 'products',
         loadChildren: () => import('../pages/products/products.module').then( m => m.ProductsModule ),
-        // canActivate: [AuthGuard]
+        canActivate: [NoUserGuard],
+        // canActivate: [AuthGuard] // Esto valida el token al momento de entrar al módulo de productos
       },
       {
         path: 'categories',
-        loadChildren: () => import('../pages/categories/categories.module').then( m => m.CategoriesModule )
+        loadChildren: () => import('../pages/categories/categories.module').then( m => m.CategoriesModule ),
+        canActivate: [NoUserGuard],
       },
       {
         path: 'users',
-        loadChildren: () => import('../pages/users/users.module').then( m => m.UsersModule )
+        loadChildren: () => import('../pages/users/users.module').then( m => m.UsersModule ),
+        canActivate: [NoUserGuard],
       },
       {
         path: 'customers',

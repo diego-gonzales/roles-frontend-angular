@@ -27,7 +27,7 @@
                       <th>Category</th>
                       <th>Price</th>
                       <th>Stock</th>
-                      <th>Actions</th>
+                      <th *ngIf="authenticationService.isAdmin()">Actions</th>
                   </thead>
                   <tbody>
                       <tr *ngFor="let product of products; let i = index"
@@ -41,7 +41,8 @@
                           <td>{{product.category?.name || '---'}}</td>
                           <td>S/.{{product.price}}</td>
                           <td>{{product.stock}}</td>
-                          <td class="td-actions">
+                          <td class="td-actions"
+                              *ngIf="authenticationService.isAdmin()">
                             <button mat-raised-button
                                     type="button"
                                     matTooltip="Edit"
