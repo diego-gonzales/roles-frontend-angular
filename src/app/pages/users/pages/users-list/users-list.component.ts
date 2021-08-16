@@ -4,6 +4,7 @@ import { User } from '../../interfaces/users-response.interface';
 import { UserService } from '../../services/user.service';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { showNotification } from '../../../../shared/helpers/notifications.helper';
+import { AuthenticationService } from '../../../authentication/services/authentication.service';
 
 @Component({
   selector: 'app-users-list',
@@ -16,7 +17,8 @@ export class UsersListComponent implements OnInit {
 
 
   constructor( private userService: UserService,
-               private dialog: MatDialog ) { }
+               private dialog: MatDialog,
+               public authenticationService: AuthenticationService ) { }
 
   ngOnInit(): void {
     this.getUsersAndFillArray();

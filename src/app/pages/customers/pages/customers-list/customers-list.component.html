@@ -27,7 +27,7 @@
                         <th>Name</th>
                         <th>Address</th>
                         <th>Phone</th>
-                        <th>Actions</th>
+                        <th *ngIf="authenticationService.isAdmin()">Actions</th>
                     </thead>
                     <tbody>
                         <tr *ngFor="let customer of customers; let i = index">
@@ -37,7 +37,8 @@
                             <td>{{customer.name}}</td>
                             <td>{{customer.address}}</td>
                             <td>{{customer.phoneNumber}}</td>
-                            <td class="td-actions">
+                            <td class="td-actions"
+                                *ngIf="authenticationService.isAdmin()">
                                 <button mat-raised-button
                                         type="button"
                                         matTooltip="Edit"

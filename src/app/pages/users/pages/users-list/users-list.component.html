@@ -26,7 +26,7 @@
                             <th>Username</th>
                             <th>Email</th>
                             <th>Roles</th>
-                            <th>Actions</th>
+                            <th *ngIf="authenticationService.isAdmin()">Actions</th>
                         </thead>
                         <tbody>
                             <tr *ngFor="let user of users; let i = index">
@@ -35,7 +35,8 @@
                                 <td>{{user.username}}</td>
                                 <td>{{user.email}}</td>
                                 <td>{{user.roles[0].name | titlecase}}</td>
-                                <td class="td-actions">
+                                <td class="td-actions"
+                                    *ngIf="authenticationService.isAdmin()">
                                     <button mat-raised-button
                                             type="button"
                                             matTooltip="Edit"

@@ -10,20 +10,20 @@ declare interface RouteInfo {
     roles?: string[];
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/pages/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '', roles: ['admin', 'moderator'] },
+    { path: '/pages/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '', roles: ['admin', 'moderator', 'user'] },
     // { path: '/pages/user-profile', title: 'User Profile',  icon:'person', class: '' },
     // { path: '/pages/table-list', title: 'Table List',  icon:'content_paste', class: '' },
     // { path: '/pages/typography', title: 'Typography',  icon:'library_books', class: '' },
     // { path: '/pages/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
     // { path: '/pages/maps', title: 'Maps',  icon:'location_on', class: '' },
     // { path: '/pages/notifications', title: 'Notifications',  icon:'notifications', class: '' },
-    { path: '/pages/sales', title: 'Sales',  icon:'store_front', class: '', roles: ['admin', 'moderator'] },
-    { path: '/pages/products', title: 'Products',  icon:'liquor', class: '', roles: ['admin'] },
-    { path: '/pages/customers', title: 'Customers',  icon:'settings_accessibility', class: '', roles: ['admin', 'moderator'] },
-    { path: '/pages/users', title: 'Users',  icon:'portrait', class: '', roles: ['admin'] },
-    { path: '/pages/categories', title: 'Categories',  icon:'category', class: '', roles: ['admin'] },
+    { path: '/pages/sales', title: 'Sales',  icon:'store_front', class: '', roles: ['admin', 'moderator', 'user'] },
+    { path: '/pages/products', title: 'Products',  icon:'liquor', class: '', roles: ['admin', 'moderator'] },
+    { path: '/pages/customers', title: 'Customers',  icon:'settings_accessibility', class: '', roles: ['admin', 'moderator', 'user'] },
+    { path: '/pages/users', title: 'Users',  icon:'portrait', class: '', roles: ['admin', 'moderator'] },
+    { path: '/pages/categories', title: 'Categories',  icon:'category', class: '', roles: ['admin', 'moderator'] },
     // { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
-    { path: '/authentication/signin', title: 'Logout',  icon:'logout', class: 'active-pro', roles: ['admin', 'moderator'] },
+    { path: '/authentication/signin', title: 'Logout',  icon:'logout', class: 'active-pro', roles: ['admin', 'moderator', 'user'] },
 ];
 
 @Component({

@@ -65,7 +65,7 @@ export class AuthenticationService {
                );
   };
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('token');
   };
 
@@ -73,5 +73,10 @@ export class AuthenticationService {
     const payload = token.split('.')[1];
     const payloadDecoded = atob(payload);
     return JSON.parse(payloadDecoded);
+  };
+
+  isAdmin(): boolean {
+    const { roles } = this.currentUser;
+    return (roles.includes('admin')) ? true : false;
   };
 }
