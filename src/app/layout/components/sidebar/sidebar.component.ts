@@ -7,22 +7,23 @@ declare interface RouteInfo {
     title: string;
     icon: string;
     class: string;
+    roles?: string[];
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/pages/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
+    { path: '/pages/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '', roles: ['admin', 'moderator'] },
     // { path: '/pages/user-profile', title: 'User Profile',  icon:'person', class: '' },
     // { path: '/pages/table-list', title: 'Table List',  icon:'content_paste', class: '' },
     // { path: '/pages/typography', title: 'Typography',  icon:'library_books', class: '' },
     // { path: '/pages/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
     // { path: '/pages/maps', title: 'Maps',  icon:'location_on', class: '' },
     // { path: '/pages/notifications', title: 'Notifications',  icon:'notifications', class: '' },
-    { path: '/pages/sales', title: 'Sales',  icon:'store_front', class: '' },
-    { path: '/pages/products', title: 'Products',  icon:'liquor', class: '' },
-    { path: '/pages/customers', title: 'Customers',  icon:'settings_accessibility', class: '' },
-    { path: '/pages/users', title: 'Users',  icon:'portrait', class: '' },
-    { path: '/pages/categories', title: 'Categories',  icon:'category', class: '' },
+    { path: '/pages/sales', title: 'Sales',  icon:'store_front', class: '', roles: ['admin', 'moderator'] },
+    { path: '/pages/products', title: 'Products',  icon:'liquor', class: '', roles: ['admin'] },
+    { path: '/pages/customers', title: 'Customers',  icon:'settings_accessibility', class: '', roles: ['admin', 'moderator'] },
+    { path: '/pages/users', title: 'Users',  icon:'portrait', class: '', roles: ['admin'] },
+    { path: '/pages/categories', title: 'Categories',  icon:'category', class: '', roles: ['admin'] },
     // { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
-    { path: '/authentication/signin', title: 'Logout',  icon:'logout', class: 'active-pro' },
+    { path: '/authentication/signin', title: 'Logout',  icon:'logout', class: 'active-pro', roles: ['admin', 'moderator'] },
 ];
 
 @Component({
@@ -37,6 +38,7 @@ export class SidebarComponent implements OnInit {
   get currentUser() {
     return this.authService.currentUser;
   };
+
 
   constructor( private authService: AuthenticationService) { }
 
@@ -56,6 +58,20 @@ export class SidebarComponent implements OnInit {
     if (title === 'Logout') {
       this.authService.logout();
     };
+  };
+
+  itsAuthorized(item: RouteInfo): boolean {
+    const { roles } = this.authService.currentUser;
+    let value: boolean;
+  
+    item.roles.forEach(rol => {
+      if (roles.includes(rol)) {
+        value = true;
+        return;
+      }
+    });
+
+    return value;
   };
 
 }
