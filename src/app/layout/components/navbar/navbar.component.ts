@@ -120,7 +120,7 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  getTitle() {
+  getTitle(): string {
     var titlee = this.location.prepareExternalUrl(this.location.path());
     const array = titlee.split('/');
 
@@ -142,5 +142,11 @@ export class NavbarComponent implements OnInit {
     // }
 
     // return "Dashboard";
-  }
+  };
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigateByUrl('/authentication/signin');
+  };
+
 }

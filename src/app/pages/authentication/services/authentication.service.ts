@@ -65,7 +65,7 @@ export class AuthenticationService {
                );
   };
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('token');
   };
 
@@ -73,5 +73,17 @@ export class AuthenticationService {
     const payload = token.split('.')[1];
     const payloadDecoded = atob(payload);
     return JSON.parse(payloadDecoded);
+  };
+
+  // método que me sirve para evitar mostrar las opciones de 'edit' y 'delete' en los distintos módulos
+  isAdmin(): boolean {
+    const { roles } = this.currentUser;
+    return (roles.includes('admin')) ? true : false;
+  };
+
+  // método que me servirá para el guard 'NoUserGuard'
+  isUser(): boolean {
+    const { roles } = this.currentUser;
+    return (roles.includes('user')) ? true : false;
   };
 }
