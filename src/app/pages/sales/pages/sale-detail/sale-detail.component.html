@@ -81,9 +81,43 @@
                         </div>
                     </div>
 
+                    <div class="row mt-4">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <button class="btn btn-success"
+                            type="button"
+                            (click)="showPDF()">
+                                <i class="material-icons mr-2">ballot</i>
+                                Show e-Ballot
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
 
     </div>
+</div>
+
+
+<div id="boletaHTML" #boletaHTML hidden style="height: 100%;">
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Code Product</th>
+                <th>Name</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let productElement of sale?.products">
+                <!-- [routerLink]="['/pages/products/detail', product._id]" -->
+                <td>{{productElement.product._id}}</td>
+                <td>{{productElement.product.name}}</td>
+                <td>{{productElement.product.price | currency:'S/.'}}</td>
+                <td>{{productElement.quantity}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
