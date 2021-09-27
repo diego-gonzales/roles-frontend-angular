@@ -52,7 +52,7 @@
                     </div> -->
 
                     <div class="">
-                        <table class="table text-center" mat-table [dataSource]="dataSource">
+                        <table class="table text-center" mat-table [dataSource]="dataSource" *ngIf="sales.length > 0">
                             <!-- Position Column -->
                             <!-- <ng-container matColumnDef="position">
                                 <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -68,7 +68,7 @@
                             <!-- Customer Column -->
                             <ng-container matColumnDef="customer">
                                 <th class="text-warning text-center" mat-header-cell *matHeaderCellDef>Customer Document</th>
-                                <td mat-cell *matCellDef="let sale">{{sale.customer.documentNumber}}</td>
+                                <td mat-cell *matCellDef="let sale">{{sale.customer.documentNumber || 'abcb'}}</td>
                             </ng-container>
                         
                             <!-- Seller Column -->
